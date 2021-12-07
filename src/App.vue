@@ -1,26 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <ThemeSwticher />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ThemeSwticher from "./components/UI/ThemeSwitcher.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ThemeSwticher,
+  },
+};
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Comfortaa&display=swap");
+@import 'assets/scss/themes.scss';
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#app,
+button {
+  font-family: Comfortaa, Arial, sans-serif;
 }
 </style>
