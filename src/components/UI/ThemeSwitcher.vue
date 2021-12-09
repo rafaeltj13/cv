@@ -1,42 +1,42 @@
 <template>
   <div class="theme-switcher-container">
     <i class="far fa-sun"></i>
-    <el-switch v-model="themeValue" />
+    <n-switch
+      v-model:value="themeValue"
+      size="small"
+      checked-value="dark"
+      unchecked-value="light"
+    />
     <i class="far fa-moon"></i>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, watch } from "vue";
-export default {
-  setup() {
-    const themeValue = ref(false);
-
-    const setTheme = () => {
-      const htmlElement = document.documentElement;
-
-      let theme = localStorage.getItem("theme");
-
-      theme = theme ? theme : "light";
-
-      htmlElement.setAttribute("theme", theme);
-      themeValue.value = theme !== "light";
-    };
+import { defineComponent, ref, watch } from "vue";
+import { NSwitch } from "naive-ui";
+export default defineComponent({
+  components: {
+    NSwitch,
+  },
+  props: {
+    modelValue: {
+      type: String,
+      required: true
+    },
+  },
+  setup(props, context) {
+    const themeValue = ref(props.modelValue);
 
     watch(themeValue, (value) => {
-      localStorage.setItem("theme", value ? "dark" : "light");
-      setTheme();
-    });
-
-    onMounted(() => {
-      setTheme();
+      localStorage.setItem('theme', value);
+      context.emit("update:modelValue", value);
     });
 
     return {
       themeValue,
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -45,16 +45,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 84px;
 }
 
 i {
   width: 18px;
   height: 18px;
   margin: 0 4px;
-}
-
-.el-switch.is-checked .el-switch__core {
-  border-color: var(--primary);
-  background-color: var(--primary);
+  display: flex;
+  align-items: center;
 }
 </style>
