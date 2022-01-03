@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch, onMounted } from "vue";
+import { useStore } from 'vuex';
 import { NSwitch } from "naive-ui";
 export default defineComponent({
   components: {
@@ -21,15 +22,30 @@ export default defineComponent({
   props: {
     modelValue: {
       type: String,
-      required: true
+      required: true,
     },
   },
   setup(props, context) {
-    const themeValue = ref(props.modelValue);
+    const store = useStore();
+    const themeValue = ref(props.modelValue || store.getters['Settings/theme']);
+
+    const updateThemeValue = (value) => {
+      const htmlElement = document.documentElement;
+
+      localStorage.setItem("theme", value);
+      htmlElement.setAttribute("theme", value);
+      store.dispatch('Settings/setTheme', value);
+
+      context.emit("update:modelValue", value);
+    };
+
+    onMounted(() => {
+      const htmlElement = document.documentElement;
+      htmlElement.setAttribute("theme", "light");
+    });
 
     watch(themeValue, (value) => {
-      localStorage.setItem('theme', value);
-      context.emit("update:modelValue", value);
+      updateThemeValue(value);
     });
 
     return {

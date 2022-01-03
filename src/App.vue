@@ -1,50 +1,50 @@
 <template>
   <n-config-provider
-    :theme="theme"
     :theme-overrides="theme === 'light' ? lightTheme : darkTheme"
   >
     <section>
       <Navbar />
       <div class="tab-container">
-        <div class="empty-div"></div>
         <n-tabs
-          default-value="oasis"
+          default-value="aboutme"
           justify-content="space-evenly"
           type="line"
         >
-          <n-tab-pane name="oasis" tab="Oasiss">Wonderwall</n-tab-pane>
-          <n-tab-pane name="the beatles" tab="the Beatles">Hey Jude</n-tab-pane>
-          <n-tab-pane name="jay chou" tab="Jay Chou">Qilixiang</n-tab-pane>
+          <n-tab-pane name="aboutme" :tab="t('navbar.aboutme')">About me</n-tab-pane>
+          <n-tab-pane name="experience" :tab="t('navbar.experience')">Experience</n-tab-pane>
+          <n-tab-pane name="education" :tab="t('navbar.education')">Education</n-tab-pane>
+          <n-tab-pane name="contact" :tab="t('navbar.contact')">Contact</n-tab-pane>
         </n-tabs>
-        <ThemeSwticher v-model="theme" class="ml-16" />
       </div>
     </section>
   </n-config-provider>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, computed } from "vue";
 import { NConfigProvider, NTabs, NTabPane } from "naive-ui";
+import { useI18n } from "vue-i18n";
+import { useStore } from 'vuex';
 import Navbar from "./components/UI/Navbar.vue";
-import ThemeSwticher from "./components/UI/ThemeSwitcher.vue";
 import { lightTheme, darkTheme } from "./utils/Themes";
 
 export default defineComponent({
   name: "App",
   components: {
     Navbar,
-    ThemeSwticher,
     NConfigProvider,
     NTabs,
     NTabPane,
   },
   setup() {
-    const theme = ref(localStorage.getItem("theme") || "light");
+    const { t } = useI18n();
+    const store = useStore();
 
     return {
-      theme,
+      theme: computed(() => store.getters['Settings/theme']),
       lightTheme,
       darkTheme,
+      t,
     };
   },
 });
@@ -53,6 +53,7 @@ export default defineComponent({
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Comfortaa&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "./assets/scss/themes.scss";
 
 #app {
   font-family: Comfortaa, Arial, sans-serif;
@@ -63,7 +64,7 @@ export default defineComponent({
 
 body {
   margin: 0;
-  padding: 0 32px;
+  background-color: var(--main-bg);
 }
 
 html {
@@ -78,14 +79,6 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.empty-div {
-  width: 84px;
-  margin-right: 16px;
-}
-
-.ml-16 {
-  margin-left: 16px;
+  background: var(--navbar);
 }
 </style>
