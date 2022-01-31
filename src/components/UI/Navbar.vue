@@ -1,25 +1,32 @@
 <template>
   <header class="header-container">
-    <h1 class="name-title">Rafael Maciel</h1>
-    <h2 class="job-description">{{ t("navbar.job") }}</h2>
-    <ThemeSwticher />
+    <transition name="fade">
+      <div v-show="show">
+        <div class="header-wrapper">
+          <h1 class="name-title">{{ t('name') }}</h1>
+            <h2 class="job-description">{{ t("navbar.job") }}</h2>
+        </div>
+      </div>
+    </transition>
   </header>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import ThemeSwticher from "./ThemeSwitcher.vue";
 
 export default defineComponent({
-  components: {
-    ThemeSwticher,
-  },
   setup() {
     const { t } = useI18n();
+    const show = ref(false);
+
+    setTimeout(() => {
+      show.value = true;
+    }, 1000);
 
     return {
       t,
+      show,
     };
   },
 });
@@ -27,7 +34,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .header-container {
-  background-color: var(--navbar);
+  background: var(--navbar);
+  min-height: 132px;
+}
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .name-title {
   font-size: 48px;
@@ -36,5 +50,15 @@ export default defineComponent({
 }
 .job-description {
   margin: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
