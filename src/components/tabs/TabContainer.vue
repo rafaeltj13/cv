@@ -1,7 +1,7 @@
 <template>
   <div ref="tabsContainer">
     <div class="tabs-container">
-      <h4 class="tab-element">{{ t('name') }}</h4>
+      <h4 class="tab-element">{{ t("name") }}</h4>
       <transition-group name="list" tag="div" class="tab-selection-container">
         <p
           v-for="tab in currentTabs"
@@ -13,7 +13,10 @@
           {{ t(`tabContainer.${tab}`) }}
         </p>
       </transition-group>
-      <ThemeSwticher class="tab-element" />
+      <div class="settings-container">
+        <LanguageSelector />
+        <ThemeSwticher class="tab-element" />
+      </div>
     </div>
     <transition name="component" mode="out-in">
       <component :is="selectedTab" class="content-container" />
@@ -22,17 +25,19 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import ThemeSwticher from "../UI/ThemeSwitcher.vue";
+import ThemeSwticher from "@/components/UI/ThemeSwitcher.vue";
+import LanguageSelector from "@/components/UI/LanguageSelector.vue";
 import AboutMe from "./AboutMe.vue";
 import Contact from "./Contact.vue";
 import Experience from "./Experience.vue";
 
 const TABS = ["AboutMe", "Experience", "Contact"];
-export default defineComponent({
+export default {
   components: {
     ThemeSwticher,
+    LanguageSelector,
     AboutMe,
     Contact,
     Experience,
@@ -44,14 +49,10 @@ export default defineComponent({
     const tabsContainer = ref(null);
 
     onMounted(() => {
-      document.addEventListener("scroll", () => {
-        console.log(tabsContainer.value.scrollY);
-      });
-
       TABS.forEach((tab) => {
-          currentTabs.value.push(tab);
+        currentTabs.value.push(tab);
       });
-      selectedTab.value = TABS[0];
+      selectedTab.value = TABS[1];
     });
 
     const selectTab = (tab) => {
@@ -66,7 +67,7 @@ export default defineComponent({
       tabsContainer,
     };
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>
@@ -96,11 +97,19 @@ export default defineComponent({
   color: var(--primary);
 }
 .tab-element {
+  width: 120px;
+  text-align: left;
   margin: 0 16px;
 }
 .content-container {
-  width: 60vw;
+  width: 58vw;
   padding: 16px 20vw;
+}
+.settings-container {
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .list-enter-active,

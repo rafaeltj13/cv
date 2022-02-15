@@ -1,10 +1,10 @@
 export default {
   navbar: {
-    job: "Software Engineer",
-    aboutme: 'About me',
-    experience: 'Experience',
-    education: 'Education',
-    contact: 'Contact',
+    job: "Engenheiro de Software",
+    aboutme: 'Sobre mim',
+    experience: 'Experiência',
+    education: 'Educação',
+    contact: 'Contato',
   },
   aboutme: {
     hey: "Hey, my name is",

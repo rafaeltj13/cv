@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-export default defineComponent({
+export default {
   setup() {
     const { t } = useI18n();
     const show = ref(false);
@@ -29,7 +29,7 @@ export default defineComponent({
       show,
     };
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,36 +1,45 @@
 <template>
   <section>
-    <Navbar />
-    <TabContainer />
+    <n-notification-provider>
+      <n-config-provider :theme-overrides="currentTheme">
+        <Navbar />
+        <TabContainer />
+      </n-config-provider>
+    </n-notification-provider>
   </section>
 </template>
 
 <script>
-import { defineComponent, computed } from "vue";
+import { NNotificationProvider, NConfigProvider } from "naive-ui";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
 import Navbar from "./components/UI/Navbar";
 import { lightTheme, darkTheme } from "./utils/Themes";
 import TabContainer from "./components/tabs/TabContainer";
 
-export default defineComponent({
+export default {
   name: "App",
   components: {
     Navbar,
-    TabContainer
+    TabContainer,
+    NNotificationProvider,
+    NConfigProvider,
   },
   setup() {
     const { t } = useI18n();
     const store = useStore();
+    const themeValue = computed(() => store.getters["Settings/theme"]);
+    const currentTheme = computed(() =>
+      themeValue.value === "dark" ? darkTheme : lightTheme
+    );
 
     return {
-      theme: computed(() => store.getters["Settings/theme"]),
-      lightTheme,
-      darkTheme,
+      currentTheme,
       t,
     };
   },
-});
+};
 </script>
 
 <style lang="scss">

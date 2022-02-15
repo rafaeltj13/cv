@@ -1,67 +1,53 @@
 <template>
   <div class="theme-switcher-container">
-    <i class="far fa-sun"></i>
-    <n-switch
-      v-model:value="themeValue"
-      size="small"
-      checked-value="dark"
-      unchecked-value="light"
-    />
-    <i class="far fa-moon"></i>
+    <transition name="fade" mode="out-in">
+      <i
+        v-if="themeValue === 'dark'"
+        @click="updateThemeValue('light')"
+        class="far fa-sun"
+      ></i>
+      <i
+        v-else-if="themeValue === 'light'"
+        @click="updateThemeValue('dark')"
+        class="far fa-moon"
+      ></i>
+    </transition>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, watch, onMounted } from "vue";
-import { useStore } from 'vuex';
-import { NSwitch } from "naive-ui";
-export default defineComponent({
-  components: {
-    NSwitch,
-  },
-  props: {
-    modelValue: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props, context) {
+import { computed, onMounted } from "vue";
+import { useStore } from "vuex";
+export default {
+  setup() {
     const store = useStore();
-    const themeValue = ref(props.modelValue || store.getters['Settings/theme']);
+    const themeValue = computed(() => store.getters["Settings/theme"]);
 
     const updateThemeValue = (value) => {
       const htmlElement = document.documentElement;
 
       localStorage.setItem("theme", value);
       htmlElement.setAttribute("theme", value);
-      store.dispatch('Settings/setTheme', value);
-
-      context.emit("update:modelValue", value);
+      store.dispatch("Settings/setTheme", value);
     };
 
     onMounted(() => {
-      const htmlElement = document.documentElement;
-      htmlElement.setAttribute("theme", "light");
-    });
-
-    watch(themeValue, (value) => {
-      updateThemeValue(value);
+      updateThemeValue("light");
     });
 
     return {
       themeValue,
+      updateThemeValue,
     };
   },
-});
+};
 </script>
 
 <style lang="scss" scoped>
 .theme-switcher-container {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 84px;
 }
 
 i {
@@ -70,5 +56,16 @@ i {
   margin: 0 4px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -3,29 +3,20 @@ export const lightTheme = {
     fontFamily: 'Comfortaa',
     textColorBase: '#2A2E2D',
     primaryColor: '#2A2E2D',
-    baseColor: '#FAFAFB',
+    baseColor: '#D2D3D5',
+    primaryColorHover: '#2A2E2D',
+    inputColor: '#D2D3D5',
+    borderColor: '#D2D3D5',
+    iconColor: '#2A2E2D'
   },
-  Tabs: {
-    tabTextColorLine: '#FAFAFB',
-    tabTextColorActiveLine: '#2A2E2D',
-    tabBorderColor: '#393E46',
-  }
 };
 
 export const darkTheme = {
   common: {
     fontFamily: 'Comfortaa',
-    //primaryColor: '#2A2E2D',
-    //baseColor: '#D2D3D5',
     primaryColor: '#f51',
     baseColor: '#654321',
+    primaryColorHover: '#181',
+    inputColor: '#812'
   },
-  Tabs: {
-    //tabTextColorLine: '#FAFAFB',
-    //tabTextColorActiveLine: '#2A2E2D',
-    //tabBorderColor: '#393E46',
-    tabTextColorLine: '#f51',
-    tabTextColorActiveLine: '#654321',
-    tabBorderColor: '#393E46',
-  }
 };
