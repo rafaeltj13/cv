@@ -59,6 +59,10 @@ body {
   background-color: var(--main-bg);
 }
 
+p {
+  margin: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }

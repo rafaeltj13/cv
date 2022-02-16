@@ -51,8 +51,6 @@ export default {
 }
 
 i {
-  width: 18px;
-  height: 18px;
   margin: 0 4px;
   display: flex;
   align-items: center;

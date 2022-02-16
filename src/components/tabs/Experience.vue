@@ -1,59 +1,102 @@
 <template>
   <section>
     <div>
-      <h2 class="experience-title">
-        {{ t("experience.title") }}
-      </h2>
+      <div class="title-container">
+        <h2 class="experience-title">
+          {{ t("experience.title") }}
+        </h2>
+        <a
+          href="/files/cv-rafael-maciel.pdf"
+          download
+          style="text-decoration: none"
+          ><n-button>{{ t("experience.cv") }}</n-button></a
+        >
+      </div>
       <transition-group name="list" tag="div" appear>
-        <card
+        <ExperienceCard
           v-for="experience of experiences"
           :key="experience.title"
-          class="experience-card"
-        >
-          {{ t(experience.title) }}
-        </card>
+          :experience="experience"
+        />
       </transition-group>
     </div>
-    <div class="margin-sections" v-if="experiences.length === 10">
+    <div class="margin-sections" v-if="experiences.length === 5">
       <h2 class="experience-title">
         {{ t("experience.education") }}
       </h2>
       <transition-group name="list" tag="div" appear>
-        <card
+        <ExperienceCard
           v-for="education of educations"
           :key="education.title"
-          class="experience-card"
-        >
-          {{ t(education.title) }}
-        </card>
+          :experience="education"
+        />
       </transition-group>
     </div>
   </section>
 </template>
 
 <script>
-import Card from "@/components/UI/Card";
-import { useI18n } from "vue-i18n";
-import { onMounted, ref } from "@vue/runtime-core";
-
 const EXPERIENCES_ARRAY = [
-  { title: "1" },
-  { title: "2" },
-  { title: "3" },
-  { title: "4" },
-  { title: "5" },
-  { title: "6" },
-  { title: "7" },
-  { title: "8" },
-  { title: "9" },
-  { title: "10" },
+  {
+    company: "Trio",
+    title: "experience.engineer",
+    location: "experience.location.trio",
+    duration: "experience.duration.trio",
+    description: "experience.descriptions.trio",
+    frameworks: ["Vue.js", "Express.js", "Node.js", "BigQuery"],
+  },
+  {
+    company: "Xtra Holdings LLC",
+    title: "experience.engineer",
+    location: "experience.location.xtra",
+    duration: "experience.duration.xtra",
+    description: "experience.descriptions.xtra",
+    frameworks: ["Vue.js", "Express.js", "Node.js", "MongoDB"],
+  },
+  {
+    company: "Lella.co",
+    title: "experience.engineer",
+    location: "experience.location.lella",
+    duration: "experience.duration.lella",
+    description: "experience.descriptions.lella",
+    frameworks: ["React", "Angular", "Express.js", "Node.js", "MongoDB"],
+  },
+  {
+    company: "SPLAB",
+    title: "experience.analyst",
+    location: "experience.location.splab",
+    duration: "experience.duration.ingenico",
+    description: "experience.descriptions.ingenico",
+    frameworks: ["React", "Node.js", "Express.js", "Sequelize", "SQL"],
+  },
+  {
+    company: "SPLAB",
+    title: "experience.front",
+    location: "experience.location.splab",
+    duration: "experience.duration.efinance",
+    description: "experience.descriptions.efinance",
+    frameworks: ["AngularJS"],
+  },
 ];
 
-const EDUCATION_ARRAY = [{ title: "Graduation" }];
+const EDUCATION_ARRAY = [
+  {
+    company: "UFCG",
+    title: "experience.bachelor",
+    location: "experience.location.splab",
+    duration: "experience.duration.bachelor",
+  },
+];
+
+import ExperienceCard from "@/components/UI/ExperienceCard";
+import { useI18n } from "vue-i18n";
+import { onMounted, ref } from "@vue/runtime-core";
+import { NButton } from "naive-ui";
 
 export default {
   components: {
-    Card,
+    ExperienceCard,
+    NButton,
   },
   setup() {
     const { t } = useI18n();
@@ -66,7 +109,7 @@ export default {
         setTimeout(() => {
           array.value.push(item);
           res();
-        }, 300 * index);
+        }, 400 * index);
       });
 
     onMounted(() => {
@@ -91,11 +134,14 @@ export default {
 .experience-title {
   text-align: left;
 }
-.experience-card {
-  margin: 16px 0;
-}
 .margin-sections {
   margin-top: 64px;
+}
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .list-move, /* apply transition to moving elements */
@@ -110,8 +156,6 @@ export default {
   transform: translateX(30px);
 }
 
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
 }

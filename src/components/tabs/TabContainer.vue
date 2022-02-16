@@ -52,7 +52,7 @@ export default {
       TABS.forEach((tab) => {
         currentTabs.value.push(tab);
       });
-      selectedTab.value = TABS[1];
+      selectedTab.value = TABS[2];
     });
 
     const selectTab = (tab) => {
