@@ -9,7 +9,13 @@ export default {
   aboutme: {
     hey: "Hey, my name is",
     name: "Rafael Maciel",
-    description: "I'm a software engineer with over 4 and a half years of experience in software development, focused on web applications. A proactive developer working remotely for global companies for over 2 and a half years, I've been part of teams with developers from around the world. Communication and teamwork make me a great addition to any development team."
+    description: `Software engineer with over 4 and a half years of experience in software development, 
+     focused on web applications. A proactive developer working remotely for global companies for over 2 and a half
+     years, I've been part of teams with developers from around the world. Communication and teamwork make me a great
+     addition to any development team.`,
+    who: "Who am I?",
+    bio: `I'm from Campina Grande, Paraíba, Brazil and I'm {age} years old.`,
+
   },
   tabContainer: {
     "AboutMe": "About Me",
