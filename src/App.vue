@@ -2,7 +2,7 @@
   <section>
     <n-notification-provider>
       <n-config-provider :theme-overrides="currentTheme">
-        <Navbar />
+        <Navbar v-if="false" />
         <TabContainer />
       </n-config-provider>
     </n-notification-provider>
@@ -61,6 +61,10 @@ body {
 
 p {
   margin: 0;
+}
+
+i {
+  color: var(--font)
 }
 
 html {

@@ -6,10 +6,23 @@
       <p class="about-me-description">{{ t("aboutme.description") }}</p>
       <NDivider class="divider" />
       <h2>{{ t("aboutme.who") }}</h2>
-      <div class="bio-container" v-if="profilePhotoSrc">
-        <img :src="profilePhotoSrc" alt="profile-photo" class="profile-photo" />
-        <p>{{ t("aboutme.bio", { age: calculateAge() }) }}</p>
-      </div>
+      <n-grid cols="1 s:1 m:1 l:1 xl:2" responsive="screen" v-if="profilePhotoSrc">
+        <n-grid-item>
+          <img
+            :src="profilePhotoSrc"
+            alt="profile-photo"
+            class="profile-photo"
+          />
+        </n-grid-item>
+        <n-grid-item class="bio-container">
+          <p class="bio-info">
+            {{ t("aboutme.bio", { age: calculateAge() }) }}
+          </p>
+          <p class="bio-info">{{ t("aboutme.bioWork") }}</p>
+        </n-grid-item>
+      </n-grid>
+      <NDivider class="divider" />
+      THis project is created using...
     </div>
   </transition>
 </template>
@@ -19,11 +32,13 @@ import { useI18n } from "vue-i18n";
 import axios from "axios";
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
-import { NDivider } from "naive-ui";
+import { NDivider, NGrid, NGridItem } from "naive-ui";
 
 export default {
   components: {
     NDivider,
+    NGrid,
+    NGridItem,
   },
   setup() {
     const { t } = useI18n();
@@ -38,7 +53,7 @@ export default {
 
     const calculateAge = () => {
       const today = new Date();
-      const birthDate = new Date('1997-07-22');
+      const birthDate = new Date("1997-07-22");
       let age = today.getFullYear() - birthDate.getFullYear();
       const m = today.getMonth() - birthDate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -54,7 +69,7 @@ export default {
     return {
       t,
       profilePhotoSrc,
-      calculateAge
+      calculateAge,
     };
   },
 };
@@ -77,9 +92,9 @@ export default {
 }
 .about-me-description {
   text-align: left;
+  font-size: 18px;
 }
 .bio-container {
-  display: flex;
   text-align: left;
 }
 .divider {
@@ -87,6 +102,12 @@ export default {
 }
 .profile-photo {
   margin-right: 16px;
+  border-radius: 8px;
+  flex: 1;
+}
+.bio-info {
+  font-size: 18px;
+  margin-bottom: 16px;
 }
 
 .about-me-enter-active,

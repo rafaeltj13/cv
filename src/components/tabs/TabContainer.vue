@@ -94,12 +94,13 @@ export default {
 }
 .selected-tab,
 .tab-title:hover {
-  color: var(--primary);
+  color: var(--tertiary);
 }
 .tab-element {
   width: 120px;
   text-align: left;
   margin: 0 16px;
+  color: var(--font)
 }
 .content-container {
   width: 58vw;

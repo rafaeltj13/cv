@@ -1,15 +1,19 @@
-[theme='dark'] {
-  --primary: #2A2E2D;
-  --secondary: #D2D3D5;
-  --main-bg: #F7F7F7;
-  --navbar: #D2D3D5;
+[theme="dark"] {
+  --primary: #232931;
+  --secondary: #393e46;
+  --tertiary: #4ecca3;
+  --font: #707070;
+  --main-bg: #393e46;
+  --navbar: #232931;
+  --scroll: #222831;
 }
 
-[theme='light'] {
+[theme="light"] {
   --primary: #fafafb;
-  --secondary: #D2D3D5;
+  --secondary: #d2d3d5;
   --tertiary: #707070;
-  --main-bg: #F7F7F7;
-  --navbar: #D2D3D5;
-  --scroll: #2A2E2D;
+  --font: #333639;
+  --main-bg: #f7f7f7;
+  --navbar: #d2d3d5;
+  --scroll: #2a2e2d;
 }

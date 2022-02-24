@@ -66,11 +66,13 @@ export default {
 <style scoped lang="scss">
 .experience-card {
   margin: 16px 0;
+  color: var(--font);
 }
 .experience-card-title {
   margin: 0;
   font-size: 26px;
   font-weight: 600;
+  color: var(--tertiary)
 }
 .experience-card-company {
   margin: 0;
@@ -96,6 +98,7 @@ export default {
 }
 .framework-btn {
   margin-right: 4px;
+  color: var(--font);
 }
 .experience-card-description {
   margin: 16px 0 8px 0;

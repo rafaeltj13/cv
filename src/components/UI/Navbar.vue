@@ -3,8 +3,10 @@
     <transition name="fade">
       <div v-show="show">
         <div class="header-wrapper">
-          <h1 class="name-title">{{ t('name') }}</h1>
+          <div>
+            <h1 class="name-title">{{ t("name") }}</h1>
             <h2 class="job-description">{{ t("navbar.job") }}</h2>
+          </div>
         </div>
       </div>
     </transition>
@@ -36,12 +38,12 @@ export default {
 .header-container {
   background: var(--navbar);
   min-height: 132px;
+  padding: 0 16px;
 }
 .header-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
 }
 .name-title {
   font-size: 48px;

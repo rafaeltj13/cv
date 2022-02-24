@@ -14,8 +14,13 @@ export default {
      years, I've been part of teams with developers from around the world. Communication and teamwork make me a great
      addition to any development team.`,
     who: "Who am I?",
-    bio: `I'm from Campina Grande, Paraíba, Brazil and I'm {age} years old.`,
-
+    bio: `I'm from Campina Grande, Paraíba, Brazil and I'm {age} years old. My favorite programming language
+     is JavaScript and my favorite framework to work is definitely Vue.js. In my free time I usually like to
+     play games, watch movies, study and spend time with my family and girlfriend.`,
+    bioWork: `I've started to study Computer Science in 2015 because of my love for gaming, after a couple of
+     semesters I've started to work in web development, inicially only on Frontend. It was a really good experience 
+     for me, an then I got the oportunity to work also on the backend. After a while I became a Full Stack
+     developer. After my graduation, `
   },
   tabContainer: {
     "AboutMe": "About Me",
