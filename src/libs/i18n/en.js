@@ -20,7 +20,8 @@ export default {
     bioWork: `I've started to study Computer Science in 2015 because of my love for gaming, after a couple of
      semesters I've started to work in web development, inicially only on Frontend. It was a really good experience 
      for me, an then I got the oportunity to work also on the backend. After a while I became a Full Stack
-     developer. After my graduation, `
+     developer.`,
+     skills: "Featured Skills"
   },
   tabContainer: {
     "AboutMe": "About Me",
@@ -69,7 +70,7 @@ export default {
        all the services available.`,
       ingenico: `Worked on three different projects. TCoM Desktop is a desktop application to test, load, clean and verify
        the company’s credit card machines. TCoM Loader extracted the load feature from TCoM Desktop to a new desktop platform.
-       LiTT is a web application for data management and visualization for TCoM Desktop and TCoM Loader`,
+       LiTT is a web application for data management and visualization for TCoM Desktop and TCoM Loader.`,
       efinance: `Worked in a web application to provide finance management to ensure companies.`
     }
   },

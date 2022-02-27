@@ -8,7 +8,6 @@
 import { NCard } from "naive-ui";
 export default {
   setup() {
-    
   },
   components: {
     NCard,

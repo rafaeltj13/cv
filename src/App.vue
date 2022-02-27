@@ -11,7 +11,7 @@
 
 <script>
 import { NNotificationProvider, NConfigProvider } from "naive-ui";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
 import Navbar from "./components/UI/Navbar";
@@ -27,12 +27,16 @@ export default {
     NConfigProvider,
   },
   setup() {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const store = useStore();
     const themeValue = computed(() => store.getters["Settings/theme"]);
     const currentTheme = computed(() =>
       themeValue.value === "dark" ? darkTheme : lightTheme
     );
+
+    onMounted(() => {
+      if (navigator.language === "pt-BR") locale.value = "pt";
+    });
 
     return {
       currentTheme,
@@ -64,7 +68,7 @@ p {
 }
 
 i {
-  color: var(--font)
+  color: var(--font);
 }
 
 html {

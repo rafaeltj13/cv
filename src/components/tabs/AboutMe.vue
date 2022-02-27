@@ -6,7 +6,11 @@
       <p class="about-me-description">{{ t("aboutme.description") }}</p>
       <NDivider class="divider" />
       <h2>{{ t("aboutme.who") }}</h2>
-      <n-grid cols="1 s:1 m:1 l:1 xl:2" responsive="screen" v-if="profilePhotoSrc">
+      <n-grid
+        cols="1 s:1 m:1 l:1 xl:2"
+        responsive="screen"
+        v-if="profilePhotoSrc"
+      >
         <n-grid-item>
           <img
             :src="profilePhotoSrc"
@@ -22,7 +26,14 @@
         </n-grid-item>
       </n-grid>
       <NDivider class="divider" />
-      THis project is created using...
+      <h2>{{ t("aboutme.skills") }}</h2>
+      <n-grid cols="2 s:2 m:4 l:6 xl:6" responsive="screen">
+        <n-grid-item v-for="skill of skills" :key="skill">
+          <n-button round class="skill-btn">
+            {{ skill }}
+          </n-button>
+        </n-grid-item>
+      </n-grid>
     </div>
   </transition>
 </template>
@@ -33,14 +44,31 @@ import axios from "axios";
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { NDivider, NGrid, NGridItem } from "naive-ui";
+import { NButton } from "naive-ui";
 
 export default {
   components: {
     NDivider,
     NGrid,
     NGridItem,
+    NButton,
   },
   setup() {
+    const skills = ref([
+      "Vue.js",
+      "Vue 3",
+      "Node.js",
+      "Express.js",
+      "React",
+      "React Native",
+      "Angular",
+      "Mongoose",
+      "MongoDB",
+      "Sequelize",
+      "SQL",
+      "Google BigQuery"
+    ]);
+
     const { t } = useI18n();
     const profilePhotoSrc = ref("");
 
@@ -67,6 +95,7 @@ export default {
     });
 
     return {
+      skills,
       t,
       profilePhotoSrc,
       calculateAge,
@@ -96,6 +125,7 @@ export default {
 }
 .bio-container {
   text-align: left;
+  margin: auto;
 }
 .divider {
   margin: 32px 0;
@@ -108,6 +138,10 @@ export default {
 .bio-info {
   font-size: 18px;
   margin-bottom: 16px;
+}
+.skill-btn {
+  margin: 0 0 16px 0;
+  color: var(--font);
 }
 
 .about-me-enter-active,

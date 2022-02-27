@@ -10,7 +10,7 @@
     </div>
     <div class="flex-container">
       <p class="experience-card-company">
-        {{ t(experience.company) }}
+        {{ experience.company }}
       </p>
       <i class="fa-solid fa-circle"></i>
       <p v-if="experience?.location" class="experience-card-location">

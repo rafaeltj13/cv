@@ -13,7 +13,7 @@ export const darkTheme = {
     borderColor: '#333639'
   },
   Button: {
-    textColor: '#707070'
+    textColor: '#707070',
   },
   Divider: {
     color: '#4ecca3'
